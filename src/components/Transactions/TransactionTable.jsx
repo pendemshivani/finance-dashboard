@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useApp } from "../../context/AppContext";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
@@ -7,9 +8,20 @@ import AddTransactionForm from "./AddTransactionForm";
 const TransactionTable = () => {
   const { transactions, filter, role, deleteTransaction } = useApp();
 
-  const filtered = transactions.filter((t) =>
-    filter === "all" ? true : t.type === filter
-  );
+  // ✅ Search state
+  const [search, setSearch] = useState("");
+
+  // ✅ Combined filter + search
+  const filtered = transactions.filter((t) => {
+    const matchesFilter =
+      filter === "all" ? true : t.type === filter;
+
+    const matchesSearch = t.category
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <Card className="mt-8">
@@ -17,6 +29,15 @@ const TransactionTable = () => {
       {role === "admin" && <AddTransactionForm />}
 
       <h2 className="text-xl font-bold mb-4">Transactions</h2>
+
+      {/* 🔍 Search Input */}
+      <input
+        type="text"
+        placeholder="Search by category..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="border p-2 rounded mb-4 w-full"
+      />
 
       {filtered.length === 0 ? (
         <EmptyState />
@@ -48,7 +69,9 @@ const TransactionTable = () => {
                     {t.type}
                   </span>
                 </td>
-                <td className="text-right font-semibold">₹{t.amount}</td>
+                <td className="text-right font-semibold">
+                  ₹{t.amount}
+                </td>
 
                 {role === "admin" && (
                   <td className="text-right space-x-2">

@@ -1,13 +1,25 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import transactionsData from "../data/mockData";
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [transactions, setTransactions] = useState(transactionsData);
+
+  // ✅ Load from localStorage OR fallback to mockData
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem("transactions");
+    return saved ? JSON.parse(saved) : transactionsData;
+  });
+
   const [role, setRole] = useState("viewer");
   const [filter, setFilter] = useState("all");
 
+  // ✅ Save to localStorage whenever transactions change
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
+  // ➕ Add
   const addTransaction = (newTransaction) => {
     setTransactions((prev) => [
       ...prev,
@@ -15,12 +27,12 @@ export const AppProvider = ({ children }) => {
     ]);
   };
 
-  // ✅ Delete
+  // ❌ Delete
   const deleteTransaction = (id) => {
     setTransactions((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // ✅ Edit
+  // ✏️ Edit
   const editTransaction = (updatedTransaction) => {
     setTransactions((prev) =>
       prev.map((t) =>
