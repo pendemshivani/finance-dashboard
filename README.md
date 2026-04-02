@@ -1,16 +1,90 @@
-# React + Vite
+# 💰 Finance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and interactive **Finance Dashboard Web Application** built using React.
+This app helps users track their income, expenses, and understand spending patterns through visualizations and insights.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+### 📊 Dashboard Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Total Balance, Income, and Expenses summary cards
+* Clean and modern UI design
 
-## Expanding the ESLint configuration
+### 📈 Data Visualization
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Line Chart → Balance trend over time
+* Pie Chart → Category-wise spending breakdown
+
+### 📋 Transactions Management
+
+* View all transactions
+* Add new transactions (Admin only)
+* Delete transactions
+* Filter transactions by type
+
+### 👥 Role-Based UI
+
+* **Viewer** → Can only view data
+* **Admin** → Can add and manage transactions
+
+### 💡 Insights Section
+
+* Highest spending category
+* Total income vs expenses
+* Simple financial analysis
+
+---
+
+## 🛠️ Tech Stack
+
+* React (Vite)
+* Tailwind CSS
+* Recharts (Charts)
+* Context API (State Management)
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+  components/
+    Dashboard/
+    Transactions/
+    Insights/
+    Role/
+    UI/
+  pages/
+  context/
+  data/
+  utils/
+```
+
+---
+
+## ▶️ Getting Started
+
+### 1. Install dependencies
+
+```
+npm install
+```
+
+### 2. Run development server
+
+```
+npm run dev
+```
+
+### 3. Open in browser
+
+```
+http://localhost:5173/
+```
+
+
+
+
+
